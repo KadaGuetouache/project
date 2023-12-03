@@ -25,6 +25,15 @@
 				align-items: flex-end;
 				background-size: cover;
 
+				@include sm{
+					background-position: 50% !important;
+				}
+
+				@include md{
+					background-position: 50% !important;
+					justify-content: center;	
+				}
+
 				.info-container{
 					height: 250px;
 					width: 500px;
@@ -63,6 +72,26 @@
 						text-transform: uppercase;
                         cursor: pointer;
 					}
+
+					@include md{
+						width: 80vw;
+						margin: 0!important;
+					}
+
+					@include sm{
+						width:100vw;
+						height: 200px;
+						padding: 2rem 1rem;
+						align-items: center;
+
+						h3 { font-size: 1.7rem; }
+						p{ font-size: 1rem; }
+
+						button{
+							padding: 10px 30px;
+							width: 70%;
+						}
+					}
 				}
 			}
 
@@ -87,6 +116,10 @@
 
 		&.right{
 			right: 1%;
+		}
+
+		@include md{
+			top: 30%;
 		}
 	}
 }
