@@ -1,16 +1,28 @@
+@import 'mixin.scss';
+
 .container{
-    height: 60px;
+    height: 80px;
+
+    @include md{
+		height: 120px;
+	}
 }
 
 .wrapper{
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
+
+    @include md{
+		flex-direction: column;
+	}
+}
+
+.right, .left, .center{
+    flex: 1;
 }
 
 .left{
-    flex: 1;
-
     .search-container{
         position: relative;
         display: flex;
@@ -35,12 +47,10 @@
 }
 
 .center{
-    flex: 1;
     text-align: center;
 }
 
 .right{
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -72,5 +82,9 @@
         background-color: cornflowerblue;
         color: white;
         transform: translate(-50%, -100%);
+    }
+    
+    @include md{
+        justify-content: center;
     }
 }
