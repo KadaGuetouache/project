@@ -36,8 +36,41 @@
 
 .center{
     flex: 1;
+    text-align: center;
 }
 
-right{
+.right{
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    a{
+        text-decoration: none;
+        color: #3e3e3e;
+        margin: 0 20px;
+    }
+
+    .shopping-cart{
+        cursor: pointer;
+        position: relative;
+
+        svg{
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    .badge{
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+        font-size: .65rem;
+        line-height: 1.3rem;
+        height: 20px;
+        border-radius: 50%;
+        background-color: cornflowerblue;
+        color: white;
+        transform: translate(-50%, -100%);
+    }
 }
