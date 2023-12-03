@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/categories.scss";
+import { Link } from "react-router-dom";
 
 const CategoryItem = ({ item }) => {
   return (
@@ -8,7 +9,7 @@ const CategoryItem = ({ item }) => {
         <img src={item.img} alt="" />
         <div className="content">
           <p>{item.title}</p>
-          <a href={`/products/${item.category}`}>shop now</a>
+          <Link to={`/products/${item.category}`}>shop now</Link>
         </div>
       </div>
     </div>

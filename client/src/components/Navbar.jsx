@@ -1,6 +1,7 @@
 import React from "react";
 import Search from "./Search";
 import "../styles/navbar.scss";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -16,8 +17,8 @@ const Navbar = () => {
           <h1>Clothing Circle</h1>
         </div>
         <div className="right">
-          <a href="/register">Register</a>
-          <a href="/signin">Sign In</a>
+          <Link to="/register">Register</Link>
+          <Link to="/signin">Sign In</Link>
           <div className="shopping-cart">
             <svg
               xmlns="http://www.w3.org/2000/svg"
