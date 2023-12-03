@@ -24,6 +24,7 @@ const Slider = () => {
           width="150"
           height="174"
           viewBox="0 0 150 174"
+          style={{ transform: "scale(.5)" }}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -34,6 +35,7 @@ const Slider = () => {
         <svg
           width="150"
           height="174"
+          style={{ transform: "rotate(180deg) scale(.5)" }}
           viewBox="0 0 150 174"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
