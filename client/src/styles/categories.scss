@@ -1,0 +1,77 @@
+@import 'mixin.scss';
+
+.categories-container{
+	display: flex;
+	margin-top: 5rem;
+	justify-content: center;
+
+	.category{
+		flex: 1;
+		width: calc(80%/3);
+		position: relative;
+
+		.content-container{
+			width: 100%;
+			height: 90%;
+			position: relative;
+			display: flex;
+			justify-content: center;
+
+			img{
+				width: 80%;
+				height: 100%;
+			}
+
+		.content{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate( -50%, -50% );
+			color: white;
+			width: 300px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			
+			p{
+				font-weight: bold;
+				font-size: 2rem;
+				text-transform: uppercase;
+				margin-bottom: 1rem;
+				text-align: center;
+			}
+
+			a{
+				border: none;
+				padding: 10px 30px;
+				text-transform: uppercase;
+				text-decoration: none;
+				background-color: white;
+				color: black;
+			}
+		}
+		}
+
+	}
+
+	@include lg{
+		flex-direction: column;
+		margin-top: 1rem;
+
+		.category{
+			width: 100%;	
+			margin-bottom: 2rem;
+
+			.content{
+				transform: translate( -50%, -50% );
+
+				p{
+					font-size: 1.5rem;
+					margin-bottom: 3rem;
+				}
+			}
+		}
+
+	}
+}
