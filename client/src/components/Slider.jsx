@@ -9,15 +9,11 @@ const Slider = () => {
           <div className="slide">
             <div className="content-container">
               <div className="info-container">
-                <h3>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Autem, exercitationem?
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus possimus in qui cumque consequuntur inventore
-                    minima quia, a quae earum.<button>show now</button>
-                  </p>
-                </h3>
+                <h3>Lorem ipsum dolor sit amet</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, minima quia, a quae
+                </p>
+                <button>show now</button>
               </div>
             </div>
           </div>
