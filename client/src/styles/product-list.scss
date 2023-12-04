@@ -1,0 +1,51 @@
+@import 'mixin';
+
+.product-list-container{
+    padding: 3rem;
+
+    h2{
+        font-size: 3rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+    }
+
+    .filter-container{
+        display: flex;
+        justify-content: space-between;
+
+        @include md{
+            flex-direction: column;
+
+            *{
+                margin-bottom: 1rem;
+            }
+        }
+
+        .product-filter, .product-sort{
+            span{
+                margin-right: 10px;
+            }
+
+            select{
+                padding: .4rem 1rem;
+                margin-right: 20px;
+                background-color: #fff;
+                width: 100px;
+                
+                &[name="product-sort"]{
+                    width: 120px;
+                    padding: .4rem 1rem;
+                }
+
+                option{
+                    width: 100px;
+                }
+            }
+        }
+
+        .product-sort select{
+            padding: .4rem 1rem;
+        }
+    }
+}
