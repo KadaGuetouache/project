@@ -1,0 +1,75 @@
+@import 'mixin.scss';
+
+.products-container{
+	display: grid;
+	width: 90vw;
+	margin: 0 auto;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto;
+
+	@include lg{
+		grid-template-columns: repeat(2, 1fr);
+	} 
+
+	@include sm{
+		grid-template-columns: 1fr;
+	} 
+
+	.product{
+		.content{
+			position: relative;
+			height: 100%;
+
+			img{
+				width: 100%;
+				aspect-ratio: 2/3;
+				object-fit: contain;
+				// mix-blend-mode: color-burn;
+			}
+
+			&:hover{
+				.icons{
+					visibility: visible;
+				}
+
+				div{
+					visibility: visible;
+				}
+			}
+
+			.icons{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.3);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				visibility: hidden;
+				transition: .3s transform ease-in-out;
+
+				a, div{
+					background: white;
+					color: #000;
+					width: 60px;
+					height: 60px;
+					margin: 0 20px;
+					padding: 1rem;
+					border-radius: 50%;
+					transition: .3s transform ease-in-out;
+					cursor: pointer;
+
+					.icon{
+						display: block;
+					}
+
+					&:hover{
+						transform: scale(1.2);
+					}
+				}
+			}
+		}
+	}
+}

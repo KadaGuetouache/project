@@ -55,7 +55,7 @@ export const popularProducts = [
   },
   {
     id: 4,
-    img: "https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
+    img: "https://ae01.alicdn.com/kf/S6e0cc9e9872546038bf906cdd5f18f683/New-Moto-Racing-Men-s-Zip-Up-Sweatshirt-Gresini-Racing-Team-Lovers-Track-Hoodie.jpg_.webp"
   },
   {
     id: 5,
