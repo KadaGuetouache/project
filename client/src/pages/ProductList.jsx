@@ -43,3 +43,5 @@ export const ProductList = () => {
     </Layout>
   );
 };
+
+export default ProductList;
