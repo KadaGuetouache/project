@@ -1,0 +1,70 @@
+@import 'mixin.scss';
+
+.newsletter-container{
+	background-color: rgba(tomato, .3);
+	padding: 5rem;
+
+	h2{
+		font-size: 7rem;
+	}
+
+	p{
+		font-size: 1.5rem;
+	}
+
+	.input-container{
+		padding: 3rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		input{
+			padding: 1rem;
+			width: 500px;
+			border: 1px solid rgba(gray, .5);
+			font-size: 1.3rem;
+		}
+
+		svg{
+			fill: white;
+			background-color: teal;
+			border: 1px solid teal;
+			width: 100px;
+			min-width: 95px;
+			height: 58px;
+			transform: translateY(.5px);
+			cursor: pointer;
+
+			path{
+				transform: translate(35px, 50px) scale(.8);
+			}
+		}
+	}
+
+	@include md{
+		h2{
+			font-size: 4rem;
+		}
+
+		p{
+			font-size: 1rem;
+		}
+	}
+
+	@include sm{
+		h2{
+			font-size: 3rem;
+		}
+
+		.input-container{
+			input{
+				padding: .8rem;
+			}
+
+			svg{
+				height: 48px;
+				transform: translateY(0px);
+			}
+		}
+	}
+}
