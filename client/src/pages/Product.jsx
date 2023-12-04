@@ -1,8 +1,29 @@
+import { useState } from "react";
 import React from "react";
 import Layout from "../components/Layout";
 import "../styles/product-page.scss";
 
 const Product = () => {
+  const INCREASE = "increase";
+  const DECREASE = "decrease";
+  const QUANTITIYLIMITER = 10;
+  const [quantity, setQuantity] = useState(1);
+
+  // Dummy Colors data
+  const COLORS = ["blue", "black", "red"];
+
+  // Dummy sizes
+  const SIZES = ["Large", "Medium", "Small"];
+
+  // Increase the quantity of product
+  const quantityValueHandler = (operation) => {
+    if (operation === INCREASE && quantity < QUANTITIYLIMITER) {
+      setQuantity((quantity) => quantity + 1);
+    } else if (operation === DECREASE && quantity > 1) {
+      setQuantity((quantity) => quantity - 1);
+    }
+  };
+
   const img =
     "https://ae01.alicdn.com/kf/S6e0cc9e9872546038bf906cdd5f18f683/New-Moto-Racing-Men-s-Zip-Up-Sweatshirt-Gresini-Racing-Team-Lovers-Track-Hoodie.jpg_.webp";
 
@@ -38,46 +59,37 @@ const Product = () => {
           </p>
           <p className="product-price">40.001</p>
           <div className="product-filter">
-            <div className="product-color filter">
-              <input
-                type="radio"
-                name="color"
-                value=""
-                className="radioButton"
-                style={{ background: "blue" }}
-                onChange={() => {}}
-              />
-              <input
-                type="radio"
-                name="color"
-                value=""
-                className="radioButton"
-                style={{ background: "black" }}
-                onChange={() => {}}
-              />
-              <input
-                type="radio"
-                name="color"
-                value=""
-                className="radioButton"
-                style={{ background: "tomato" }}
-                onChange={() => {}}
-              />
+            <div className="product-color-filter">
+              {COLORS.map((color) => (
+                <input
+                  key={color}
+                  type="radio"
+                  name="color"
+                  value={color}
+                  className="radioButton"
+                  style={{ backgroundColor: `${color}` }}
+                />
+              ))}
             </div>
             <div className="product-size-filter">
               <span>Size</span>
-              <select name="product-size-filter">
-                <option value="l">Large</option>
-                <option value="m">Meduim</option>
-                <option value="s">Small</option>
+              <select name="product-size-filter" defaultValue="0">
+                <option value="0" disabled>
+                  Select your Size
+                </option>
+                {SIZES.map((size) => (
+                  <option key={size} value={size.toLowerCase()}>
+                    {size}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
           <div className="product-order">
             <div className="product-quantity">
-              <button>+</button>
-              <input type="text" readOnly value={1} />
-              <button>-</button>
+              <button onClick={() => quantityValueHandler(INCREASE)}>+</button>
+              <input type="text" readOnly value={quantity} />
+              <button onClick={() => quantityValueHandler(DECREASE)}>-</button>
             </div>
             <div className="product-buy">
               <button>Add to cart</button>
