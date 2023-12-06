@@ -1,0 +1,78 @@
+@import "mixin.scss";
+
+.cart-container{
+    min-height: 860px;
+
+    h2{
+        font-size: 3rem;
+        font-weight: 300;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    .checklist{
+        display: flex;
+        position: relative;
+        overflow: none;
+
+        @include lg{
+            flex-direction: column;
+        }
+
+        .product-list{
+            width: 70%;
+        }
+
+        @include lg{
+            width: 100%;
+        }
+
+        aside{
+            padding: 2rem;
+            max-width: 500px;
+            max-height: 650px;
+            border: 1px solid rgba(0,0,0,.3);
+            margin: 0 2rem;
+
+            @include lg{
+                margin: 5rem auto;
+                width: 100vw;
+            }
+
+            @include md{
+                max-width: 350px;
+            }
+
+            h3{
+                font-weight: 300;
+                text-transform: uppercase;
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            div{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 2rem;
+                font-size: 1.3rem;
+
+                &.summary-total{
+                    font-size: 2rem;
+                    margin-top: 2rem;
+                    font-weight: 400;
+                }
+            }
+
+            .checkout{
+                border: none;
+                background-color: #000;
+                color: #fff;
+                text-transform: uppercase;
+                font-size: 1.3rem;
+                width: 100%;
+                padding: 10px 30px;
+                cursor: pointer;
+            }
+        }
+    }
+}

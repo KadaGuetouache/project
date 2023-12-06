@@ -1,0 +1,116 @@
+@import "mixin.scss";
+
+.product{
+    padding: 1rem;
+    display: flex;
+    border-bottom: 1px solid rgba(gray, .5);
+
+    @include lg{
+        width: 100vw;
+    }
+
+    @include sm{
+        flex-direction: column;
+    }
+
+    .product-img{
+        width: 30%;
+
+        @include sm{
+            width: 100%;
+        }
+
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .product-info{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        position: relative;
+
+        .close{
+            position: absolute;
+            top: 10%;
+            right: 1%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+
+            svg{
+                stroke: black;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @include sm{
+            flex-direction: column;
+        }
+
+        .product-details{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+
+            @include sm{
+                *{
+                    margin-bottom: 1rem;
+                }
+            }
+
+            strong{
+                font-size: 1.1rem;
+            }
+
+            span{
+                text-transform: uppercase;
+            }
+
+            .product-color{
+                width: 30px;
+                height: 30px;
+                background-color: cornflowerblue;
+                border-radius: 50%;
+                border: 1px solid #3e3e3e;
+            }
+        }
+
+        .product-order{
+            .product-quantity{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                input{
+                    width: 50px;
+                    padding: .8rem;
+                    border: 1px solid gray;
+                    border-radius: 10px;
+                    text-align: center;
+                    font-size: 1.1rem;
+                }
+
+                button{
+                    border: none;
+                    font-size: 3rem;
+                    font-weight: 300;
+                    padding: 1rem;
+                    background-color: #fff;
+                    cursor: pointer;
+                }
+            }
+
+            .product-price{
+                font-size: 3rem;
+                font-weight: 300;
+                text-align: center;
+            }
+        }
+    }
+}
