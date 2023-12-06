@@ -1,0 +1,54 @@
+@import 'mixin.scss';
+
+form .two-column{
+    display: flex;
+    justify-content: space-between;
+
+    div:first-child, div:last-child{
+        flex: 1;
+        width: 95%;
+    }
+
+    div:first-child{
+        label, input{
+            margin-left: 0;
+        }
+    }
+
+    div:last-child{
+        label, input{
+            margin-right: 0;
+        }
+    }
+
+    @include md{
+        flex-direction: column;
+        div:first-child, div:last-child{
+            width: 100%;
+            label, input{
+                margin: 0;
+            }
+        }
+    }
+}
+
+.field-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    width: 100%;
+
+    label{
+        text-transform: capitalize;
+        font-size: 1.1rem;
+        width: inherit;
+        margin: 0 auto .7rem;
+    }
+
+    input{
+        padding: .5rem;
+        font-size: 1.1rem;
+        width: inherit;
+        margin: 0 auto;
+    }
+}
