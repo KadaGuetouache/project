@@ -18,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className="right">
           <Link to="/register">Register</Link>
-          <Link to="/signin">Sign In</Link>
+          <Link to="/login">Log In</Link>
           <div className="shopping-cart">
             <svg
               xmlns="http://www.w3.org/2000/svg"

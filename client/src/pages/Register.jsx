@@ -1,11 +1,11 @@
 import React from "react";
-import Layout from "../components/Layout";
+import AuthLayout from "../components/AuthLayout";
 import "../styles/register.scss";
 import "../styles/components.scss";
 
 const Register = () => {
   return (
-    <Layout>
+    <AuthLayout>
       <div className="register-container">
         <div className="content">
           <h2>Create an account</h2>
@@ -86,7 +86,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-    </Layout>
+    </AuthLayout>
   );
 };
 

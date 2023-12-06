@@ -39,14 +39,6 @@
             align-items: flex-start;
         }
 
-        input{
-            width: 100%;
-            margin-bottom: 1rem;
-            padding: .5rem;
-            border: 1px solid gray;
-            border-radius: 5px;
-        }
-
         button{
             padding: 10px 30px;
             border: none;
@@ -66,6 +58,7 @@
         a{
             color: #000;
             text-transform: uppercase;
+            text-decoration: none;
             margin-top: 1rem;
         }
     }
