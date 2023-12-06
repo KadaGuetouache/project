@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthLayout from "../components/AuthLayout";
 import "../styles/register.scss";
 import "../styles/components.scss";
 
 const Register = () => {
+  const [submitButtonVisibility, setSubmitButtonVisibility] = useState(true);
+
+  const checkBoxHandler = () => {
+    setSubmitButtonVisibility(!submitButtonVisibility);
+  };
+
   return (
     <AuthLayout>
       <div className="register-container">
@@ -74,14 +80,16 @@ const Register = () => {
             </div>
             <div className="form-submit">
               <div className="form-agreement">
-                <input type="checkbox" />
+                <input type="checkbox" onClick={checkBoxHandler} />
                 <p>
                   by creating an account!, I consent to the proccessing of my
                   personal data in accordance with
                   <a href="/privacypolicy"> Privacy Policy</a>
                 </p>
               </div>
-              <button type="submit">Create</button>
+              <button type="submit" disabled={submitButtonVisibility}>
+                Create
+              </button>
             </div>
           </form>
         </div>
