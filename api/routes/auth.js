@@ -20,4 +20,25 @@ router.post("/register", async (req, res) => {
 	}
 });
 
+router.post("/login", async (req, res) => { 
+	try{ 
+		const user = await User.findOne( {"username": req.body.username } )
+
+		let userPassword
+
+		user ? userPassword = cryptoJS.AES.decrypt(user.password, process.env.PASS_TOKEN).toString(cryptoJS.enc.Utf8) : null
+
+		if (user && req.body.password === userPassword) { 
+			const { password, ...others } = user._doc;
+			res.status(200).json({ ...others } );
+		} else { 
+			res.status(400).json("Unauthorized User: please make sure that your credentials are correct and try again!");
+		}
+
+	} catch (error) { 
+		res.status(500).json("Internal Server Error");
+		console.log(error)
+	}
+} )
+
 module.exports = router;
