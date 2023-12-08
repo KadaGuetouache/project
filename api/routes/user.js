@@ -21,4 +21,13 @@ router.put( "/:id", verifyTokenAndAuthorization, async ( req, res ) => {
 	}
 } )
 
+router.delete( "/:id", verifyTokenAndAuthorization, async ( req, res ) => { 
+	try{ 
+		await User.findByIdAndDelete( req.params.id )
+		res.status( 200 ).json( "account has been deleted successfully" )
+	} catch ( error ) { 
+		res.status( 500 ).json( error )
+	}
+} )
+
 module.exports = router;

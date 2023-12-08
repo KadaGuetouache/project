@@ -29,12 +29,13 @@ router.post("/login", async (req, res) => {
 
 		user ? userPassword = cryptoJS.AES.decrypt(user.password, process.env.PASS_TOKEN).toString(cryptoJS.enc.Utf8) : null
 
-		const accessToken = jwt.sign( { 
-			id: user._id,
-			isAmdin: user.isAdmin
-		}, process.env.JWT_SECRET, { expiresIn: '3d' } )
-
 		if (user && req.body.password === userPassword) { 
+
+			const accessToken = jwt.sign( { 
+				id: user._id,
+				isAmdin: user.isAdmin
+			}, process.env.JWT_SECRET, { expiresIn: '3d' } )
+
 			const { password, ...others } = user._doc;
 			res.status(200).json({ ...others, accessToken } );
 		} else { 
