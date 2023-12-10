@@ -14,10 +14,10 @@
 	}
 
 	.block-1, .block-2, .block-3{
-		padding: 3rem;
+		padding: 2rem;
 
 		@include xl-footer{
-			padding: 1rem;
+			padding: 0rem;
 		}
 
 		@include xl{
