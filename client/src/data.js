@@ -22,19 +22,19 @@ export const slides = [
 export const categories = [
   {
     id: 1,
-    img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    img: "https://images.pexels.com/photos/5325899/pexels-photo-5325899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "SHIRT STYLE!",
     category: "women"
   },
   {
     id: 2,
-    img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    img: "https://images.pexels.com/photos/4066288/pexels-photo-4066288.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "LOUNGEWEAR LOVE",
     category: "jeans"
   },
   {
     id: 3,
-    img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+    img: "https://images.pexels.com/photos/7061901/pexels-photo-7061901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "LIGHT JACKETS",
     category: "coat"
   },
