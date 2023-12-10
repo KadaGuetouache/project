@@ -16,6 +16,19 @@
 			position: relative;
 			display: flex;
 			justify-content: center;
+			position: relative;
+
+			&::after{
+				content: "";
+				transform: translateX(12.5%);
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 80%;
+				height: 100%;
+				background-color: rgba(black, .3);
+				z-index: 1;
+			}
 
 			img{
 				width: 80%;
@@ -33,6 +46,7 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+			z-index: 2;
 			
 			p{
 				font-weight: bold;
