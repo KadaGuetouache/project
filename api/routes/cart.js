@@ -1,6 +1,6 @@
 const Cart = require( "../models/Cart.js" );
 const router = require( "express" ).Router();
-const { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } = require( "./verifyToken" );
+const { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } = require( "./verifyToken.js" );
 
 // Create new cart
 router.post( "/", verifyToken, async ( req, res ) => { 
@@ -59,3 +59,5 @@ router.get( "/", verifyTokenAndAdmin, async ( req, res ) => {
 		res.status( 500 ).json( error )
 	}
 } );
+
+module.exports = router;

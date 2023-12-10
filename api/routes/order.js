@@ -1,5 +1,5 @@
 const Order = require( "../models/Order.js" );
-const { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } from "./verifyToken.js";
+const { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } = require("./verifyToken.js");
 const router = require( "express" ).Router();
 
 // Create an order
@@ -62,4 +62,4 @@ router.get( "/find/:id", verifyTokenAndAdmin, async ( req, res ) => {
 	}
 } );
 
-
+module.exports = router;
