@@ -4,8 +4,9 @@ import Layout from "../components/Layout";
 import "../styles/product-page.scss";
 import Spinner from "../components/Spinner";
 import {BASE_URL} from "../constants/api";
-import axios from "axios";
-
+import axios from "axios"
+import { useDispatch } from "react-redux";
+import { addProduct } from "../store/cartSlice.js";
 
 const Product = () => {
   const INCREASE = "increase";
@@ -16,8 +17,10 @@ const Product = () => {
 	const [ product, setProduct ] = useState( {  } );
 	const [ color, setColor ] = useState( "" );
 	const [ size, setSize ] = useState( "" );
+	const dispatch = useDispatch(  )
 	const id = useLocation(  ).pathname.split( "/" )[ 2 ]
 
+	// Fetch product data on page load
 	useEffect( (  ) => { 
 		const getProduct = async (  ) => { 
 			try{ 
@@ -41,6 +44,11 @@ const Product = () => {
       setQuantity((quantity) => quantity - 1);
     }
   };
+
+	// handle submit
+	const handleSubmit = (  ) => { 
+		dispatch( addProduct( { ...product, color, size, quantity } ) )		
+	}
 
   return (
     <Layout>
@@ -105,7 +113,7 @@ const Product = () => {
 								<button onClick={() => quantityValueHandler(DECREASE)}>-</button>
 							</div>
 							<div className="product-buy">
-								<button>Add to cart</button>
+								<button onClick={ handleSubmit }>Add to cart</button>
 							</div>
 						</div>
 					</div>

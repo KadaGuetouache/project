@@ -2,8 +2,11 @@ import React from "react";
 import Search from "./Search";
 import "../styles/navbar.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+	const cart = useSelector( state => state.cart )
+
   return (
     <div className="container">
       <div className="wrapper">
@@ -38,7 +41,7 @@ const Navbar = () => {
                 />
               </svg>
             </Link>
-            <div className="badge">999</div>
+            <div className="badge">{ cart.quantity }</div>
           </div>
         </div>
       </div>
