@@ -24,7 +24,7 @@ const Product = ({ item }) => {
               />
             </svg>
           </div>
-          <Link to={`/product/${item.id}`} className="product-search">
+          <Link to={`/product/${item._id}`} className="product-search">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
