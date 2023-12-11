@@ -22,15 +22,15 @@ export const slides = [
 export const categories = [
   {
     id: 1,
-    img: "https://images.pexels.com/photos/5325899/pexels-photo-5325899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    title: "SHIRT STYLE!",
+    img: "https://images.pexels.com/photos/14344832/pexels-photo-14344832.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    title: "WOMEN FASHION",
     category: "women"
   },
   {
     id: 2,
     img: "https://images.pexels.com/photos/4066288/pexels-photo-4066288.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    title: "LOUNGEWEAR LOVE",
-    category: "jeans"
+    title: "MEN FASHION",
+    category: "men"
   },
   {
     id: 3,

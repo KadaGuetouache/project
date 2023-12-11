@@ -14,7 +14,9 @@ const Navbar = () => {
           </span>
         </div>
         <div className="center">
-          <h1>Clothing Circle</h1>
+					<Link to="/">
+						<h1>Clothing Circle</h1>
+					</Link>
         </div>
         <div className="right">
           <Link to="/register">Register</Link>
