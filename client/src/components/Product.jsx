@@ -1,14 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/products.scss";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../store/cartSlice";
+import seedrandom from "seedrandom";
 
 const Product = ({ item }) => {
+	const dispatch = useDispatch(  );
+
+	const handleAddProductToCart = (  ) => { 
+		const orderId = seedrandom( item._id + item.color + item.size )().toString(  )
+		dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ] } ) )
+	}
+
   return (
     <div className="product">
       <div className="content">
         <img src={item.img} alt="" />
         <div className="icons">
-          <div className="product-shop">
+          <div className="product-shop" onClick={ handleAddProductToCart }>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

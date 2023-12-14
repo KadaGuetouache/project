@@ -2,40 +2,53 @@ import React from "react";
 import Layout from "../components/Layout";
 import SingleProduct from "../components/SingleProduct";
 import "../styles/cart.scss";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
+	const products = useSelector( state => state.cart.products )
+	let subTotal = 0;
+	const ESTIMATESHIPPING = 150;
+	const SHIPPINGDISCOUNT = 50;
+	const cart = useSelector( state => state.cart )
+
+	// Calculating the subTotal
+	if ( cart.total !== 0 ){ 
+		subTotal = Math.round(( cart.total + ESTIMATESHIPPING ) - SHIPPINGDISCOUNT).toFixed( 2 );
+	}
+
   return (
     <Layout>
       <div className="cart-container">
         <h2>Your Bag</h2>
         <div className="checklist">
           <div className="product-list">
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
+						{ products.length !== 0 ? 
+						 ( products.map( product => ( 
+							<SingleProduct item={ product } key={ product._id }/>
+						) ) ) : ( 
+							<div className="msg">
+								<p>It seems like there is nothing here!</p>
+							</div>
+						)
+						}
           </div>
           <aside>
             <h3>Order Summry</h3>
             <div className="summary-subtotal">
               <p>Subtotal</p>
-              <p>$1000</p>
+              <p>${ subTotal }</p>
             </div>
             <div className="summary-estimate-shipping">
               <p>Estimate Shipping</p>
-              <p>$150</p>
+              <p>${ ESTIMATESHIPPING }</p>
             </div>
             <div className="summary-shipping-discount">
               <p>Shipping Discount</p>
-              <p>$50</p>
+              <p>${ SHIPPINGDISCOUNT }</p>
             </div>
             <div className="summary-total">
               <p>Total</p>
-              <p>$1250</p>
+              <p>${ subTotal }</p>
             </div>
             <button className="checkout">Checkout</button>
           </aside>

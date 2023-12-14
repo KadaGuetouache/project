@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "../styles/singleproduct.scss";
+import { useDispatch } from "react-redux";
+import { removeSingleProduct } from "../store/cartSlice.js";
 
-const SingleProduct = () => {
+const SingleProduct = ( { item } ) => {
   const INCREASE = "increase";
   const DECREASE = "decrease";
   const QUANTITIYLIMITER = 10;
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState( 1 );
+	const dispatch = useDispatch(  )
 
-  const img =
-    "https://ae01.alicdn.com/kf/S6e0cc9e9872546038bf906cdd5f18f683/New-Moto-Racing-Men-s-Zip-Up-Sweatshirt-Gresini-Racing-Team-Lovers-Track-Hoodie.jpg_.webp";
-
+	// Control product quantity
   const quantityValueHandler = (operation) => {
     if (operation === INCREASE && quantity < QUANTITIYLIMITER) {
       setQuantity((quantity) => quantity + 1);
@@ -17,13 +18,18 @@ const SingleProduct = () => {
       setQuantity((quantity) => quantity - 1);
     }
   };
+
+	const handleRemoveSingleProductFromCart = (  ) => { 
+		dispatch( removeSingleProduct( item ) )
+	}
+
   return (
     <div className="product">
       <div className="product-img">
-        <img src={img} alt="" />
+        <img src={item.img} alt="" />
       </div>
       <div className="product-info">
-        <span className="close">
+        <span className="close" onClick={ handleRemoveSingleProductFromCart }>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -42,18 +48,18 @@ const SingleProduct = () => {
         <div className="product-details">
           <p>
             <strong>
-              Product: <span>Jacket</span>
+              Product: <span>{ item.title }</span>
             </strong>
           </p>
           <p>
             <strong>
-              ID: <span>Jacket</span>
+              ID: <span>{ item._id }</span>
             </strong>
           </p>
-          <div className="product-color"></div>
+          <div className="product-color" style={{ "background": item.color }}></div>
           <p>
             <strong>
-              Size: <span>Jacket</span>
+              Size: <span>{ item.size }</span>
             </strong>
           </p>
         </div>
