@@ -1,0 +1,41 @@
+.notification-container{
+    position: fixed;
+    width: 50%;
+    border-radius: 10px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 0 3px 5px rgba(0,0,0,.3);
+    z-index: 999;
+
+    &.info{
+        background-color: cornflowerblue;
+    }
+
+    &.error{
+        background-color: tomato;
+    }
+
+    &.success{
+        background-color: teal;
+    }
+
+    p{
+        color: #fff;
+        text-align: center;
+        font-size: 1.0rem;
+        margin: 0;
+    }
+
+    .close svg{
+        position: absolute;
+        stroke: white;
+        cursor: pointer;
+        top: 5%;
+        right: 1%;
+        width: 30px;
+        height: 30px;
+    }
+}
