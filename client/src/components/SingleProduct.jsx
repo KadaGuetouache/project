@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/singleproduct.scss";
 import { useDispatch } from "react-redux";
-import { removeSingleProduct } from "../store/cartSlice.js";
+import { updateSingleProduct, removeSingleProduct } from "../store/cartSlice.js";
 
 const SingleProduct = ( { item } ) => {
   const INCREASE = "increase";
   const DECREASE = "decrease";
   const QUANTITIYLIMITER = 10;
-  const [quantity, setQuantity] = useState( 1 );
+	const [ operation, setOperation ] = useState( null )
+	const [ product, setProduct ] = useState( item )
+  const [ quantity, setQuantity ] = useState( product.quantity );
 	const dispatch = useDispatch(  )
 
 	// Control product quantity
   const quantityValueHandler = (operation) => {
     if (operation === INCREASE && quantity < QUANTITIYLIMITER) {
       setQuantity((quantity) => quantity + 1);
+			setOperation( INCREASE )
     } else if (operation === DECREASE && quantity > 1) {
       setQuantity((quantity) => quantity - 1);
+			setOperation( DECREASE )
     }
   };
+
+	// update product quantiy
+	useEffect( (  ) => { 
+		if ( product.quantity !== quantity ){ 
+			setProduct( { ...product, quantity } )
+		}
+	}, [ product, quantity ] )
+
+	useEffect( (  ) => { 
+		dispatch( updateSingleProduct( { product: product, operation: operation } ) )
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [ dispatch, product ] )
 
 	const handleRemoveSingleProductFromCart = (  ) => { 
 		dispatch( removeSingleProduct( item ) )
@@ -26,7 +42,7 @@ const SingleProduct = ( { item } ) => {
   return (
     <div className="product">
       <div className="product-img">
-        <img src={item.img} alt="" />
+        <img src={product.img} alt="" />
       </div>
       <div className="product-info">
         <span className="close" onClick={ handleRemoveSingleProductFromCart }>
@@ -48,18 +64,18 @@ const SingleProduct = ( { item } ) => {
         <div className="product-details">
           <p>
             <strong>
-              Product: <span>{ item.title }</span>
+              Product: <span>{ product.title }</span>
             </strong>
           </p>
           <p>
             <strong>
-              ID: <span>{ item._id }</span>
+              ID: <span>{ product._id }</span>
             </strong>
           </p>
-          <div className="product-color" style={{ "background": item.color }}></div>
+          <div className="product-color" style={{ "background": product.color }}></div>
           <p>
             <strong>
-              Size: <span>{ item.size }</span>
+              Size: <span>{ product.size }</span>
             </strong>
           </p>
         </div>
@@ -70,7 +86,7 @@ const SingleProduct = ( { item } ) => {
             <button onClick={() => quantityValueHandler(DECREASE)}>-</button>
           </div>
           <div className="product-price">
-            <p>$100</p>
+            <p>${ product.price * product.quantity }</p>
           </div>
         </div>
       </div>

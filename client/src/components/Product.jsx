@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import "../styles/products.scss";
 import { useDispatch } from "react-redux";
@@ -8,10 +8,11 @@ import seedrandom from "seedrandom";
 const Product = ({ item }) => {
 	const dispatch = useDispatch(  );
 
-	const handleAddProductToCart = (  ) => { 
+	// TODO: fix adding the same product result in two products in cart with the same variation
+	const handleAddProductToCart = useCallback( (  ) => { 
 		const orderId = seedrandom( item._id + item.color + item.size )().toString(  )
 		dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ] } ) )
-	}
+	}, [  ])
 
   return (
     <div className="product">

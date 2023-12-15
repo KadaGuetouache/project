@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/Layout";
 import SingleProduct from "../components/SingleProduct";
 import "../styles/cart.scss";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../constants/api.js";
+import { loadStripe } from "@stripe/stripe-js"
 
 const Cart = () => {
 	const products = useSelector( state => state.cart.products )
@@ -13,8 +16,24 @@ const Cart = () => {
 
 	// Calculating the subTotal
 	if ( cart.total !== 0 ){ 
-		subTotal = Math.round(( cart.total + ESTIMATESHIPPING ) - SHIPPINGDISCOUNT).toFixed( 2 );
+		subTotal = Math.round( ( cart.total + ESTIMATESHIPPING ) - SHIPPINGDISCOUNT ).toFixed( 2 );
 	}
+
+	// Make purchase with stripe
+	const makePayment = async (  ) => { 
+		const stripe = await loadStripe( "pk_test_el3DpfhvKo8bjpw2OV3hkR7m00XpKKP3pU" );
+
+		try{ 
+			const response = await axios.post( `${ BASE_URL }/checkout/payment`, { products, subTotal });
+
+			const session = await response.data;
+
+			const result = stripe.redirectToCheckout( { sessionId: session.id } )
+		} catch ( error ){ 
+			console.log( error );
+		}
+	}
+
 
   return (
     <Layout>
@@ -50,7 +69,7 @@ const Cart = () => {
               <p>Total</p>
               <p>${ subTotal }</p>
             </div>
-            <button className="checkout">Checkout</button>
+            <button className="checkout" onClick={ makePayment }>Checkout</button>
           </aside>
         </div>
       </div>

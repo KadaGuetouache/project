@@ -4,6 +4,7 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
+const stripeRoute = require("./routes/stripe");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require( "cors" );
@@ -23,5 +24,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/product", productRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/cart", cartRoute);
+app.use("/api/checkout", stripeRoute);
 
 app.listen(process.env.PORT || 5500, () => console.log(`Server is running en port ${process.env.PORT}`))

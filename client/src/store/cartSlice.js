@@ -16,7 +16,27 @@ const cartSlice = createSlice( {
 			state.products.push( action.payload );
 
 			// updating the total price in the cart
-			state.total = action.payload.price * action.payload.quantity;
+			state.total += action.payload.price * action.payload.quantity;
+		},
+		updateSingleProduct: ( state, action ) => { 
+			const currentProduct = action.payload.product;
+			const products = state.products;
+			const INCREASE = "increase";
+			const DECREASE = "decrease";
+
+			state.products = products.map( product => { 
+				if ( product.orderId === currentProduct.orderId ) { 
+					product.quantity = currentProduct.quantity;
+
+					if ( action.payload.operation === INCREASE ) { 
+						state.total += currentProduct.price;
+					} else if ( action.payload.operation === DECREASE ) { 
+						state.total -= currentProduct.price;
+					}
+				}
+
+				return product;
+			} )
 		},
 		removeSingleProduct: ( state, action ) => { 
 
@@ -36,5 +56,5 @@ const cartSlice = createSlice( {
 	}
 } )
 
-export const { addProduct, removeSingleProduct } = cartSlice.actions;
+export const { addProduct, updateSingleProduct, removeSingleProduct } = cartSlice.actions;
 export default cartSlice.reducer; 
