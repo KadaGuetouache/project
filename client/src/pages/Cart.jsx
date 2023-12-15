@@ -6,29 +6,37 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../constants/api.js";
 import { loadStripe } from "@stripe/stripe-js"
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Cart = () => {
 	const products = useSelector( state => state.cart.products )
-	let subTotal = 0;
-	const ESTIMATESHIPPING = 150;
-	const SHIPPINGDISCOUNT = 50;
 	const cart = useSelector( state => state.cart )
+	let total = 0;
+	let subTotal = cart.total;
+	const expressShipping = 334;
+	const fastShipping = 47;
+	const freeShipping = 0;
+	const location = useLocation(  );
+	const navigate = useNavigate(  );
 
-	// Calculating the subTotal
-	if ( cart.total !== 0 ){ 
-		subTotal = Math.round( ( cart.total + ESTIMATESHIPPING ) - SHIPPINGDISCOUNT ).toFixed( 2 );
-	}
+	useEffect( (  ) => { 
+		if ( location.search === "?success=true" ){ 
+		navigate( "/success", { cart: cart } );
+		}
+	}, [ location, navigate, cart ] )
+
 
 	// Make purchase with stripe
 	const makePayment = async (  ) => { 
 		const stripe = await loadStripe( "pk_test_el3DpfhvKo8bjpw2OV3hkR7m00XpKKP3pU" );
 
 		try{ 
-			const response = await axios.post( `${ BASE_URL }/checkout/payment`, { products, subTotal });
+			const response = await axios.post( `${ BASE_URL }/checkout/payment`, { products, fastShipping, expressShipping });
 
 			const session = await response.data;
 
 			const result = stripe.redirectToCheckout( { sessionId: session.id } )
+			console.log( result )
 		} catch ( error ){ 
 			console.log( error );
 		}
@@ -53,17 +61,17 @@ const Cart = () => {
           </div>
           <aside>
             <h3>Order Summry</h3>
-            <div className="summary-subtotal">
-              <p>Subtotal</p>
-              <p>${ subTotal }</p>
+            <div>
+              <p>Free Shipping</p>
+              <p>$0</p>
             </div>
-            <div className="summary-estimate-shipping">
-              <p>Estimate Shipping</p>
-              <p>${ ESTIMATESHIPPING }</p>
+            <div>
+              <p>Fast Shipping</p>
+              <p>${ fastShipping }</p>
             </div>
-            <div className="summary-shipping-discount">
-              <p>Shipping Discount</p>
-              <p>${ SHIPPINGDISCOUNT }</p>
+            <div>
+              <p>Express Shipping</p>
+              <p>${ expressShipping }</p>
             </div>
             <div className="summary-total">
               <p>Total</p>

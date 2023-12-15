@@ -1,0 +1,21 @@
+.order-container{
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	div{
+		font-size: 1.1rem;
+	}
+
+	a{
+		margin-top: 5rem;
+		text-decoration: none;
+		padding: 10px 30px;
+		background-color: teal;
+		color: white;
+		border-radius: 5px;
+		font-size: 1.1rem;
+	}
+}
