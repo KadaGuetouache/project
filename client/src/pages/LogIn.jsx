@@ -35,6 +35,7 @@ const LogIn = () => {
 
 	const updateNotification = (  ) => { 
 		setNotify( { display: false, type: '', message: '' } )
+		setError( null )
 	}
 
   return (
@@ -52,7 +53,7 @@ const LogIn = () => {
               <label htmlFor="password">Password</label>
               <input type="password" name="password" placeholder="Password"  onChange={ ( event ) => setPassword( event.target.value ) }/>
             </div>
-            <button type="submit" onClick={ handleSubmit }>Login</button>
+            <button type="submit" onClick={ handleSubmit } disabled={ isFetching }>Login</button>
             <a href="#">Do not remember your password</a>
             <Link to="/register">Create an Account</Link>
           </form>

@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 router.post("/register", async (req, res) => { 
 	const newUser = new User( { 
 		username: req.body.userName,
-		firstname: req.body.firstname,
-		lastname: req.body.lastname,
+		firstname: req.body.firstName,
+		lastname: req.body.lastName,
 		email: req.body.email,
 		password: cryptoJS.AES.encrypt(req.body.password, process.env.PASS_TOKEN).toString(),
 	} )
@@ -16,13 +16,12 @@ router.post("/register", async (req, res) => {
 		const user = await newUser.save();
 		res.status(200).json(user);
 	} catch (error){ 
-		res.status(500).json("Internal Server Error")
+		res.status(500).json(error)
 		console.log(error)
 	}
 });
 
 router.post("/login", async (req, res) => { 
-	console.log( req.body )
 	try{ 
 		const user = await User.findOne( {"username": req.body.userName } )
 
@@ -44,7 +43,7 @@ router.post("/login", async (req, res) => {
 		}
 
 	} catch (error) { 
-		res.status(500).json("Internal Server Error");
+		res.status(500).json(error);
 		console.log(error)
 	}
 } )

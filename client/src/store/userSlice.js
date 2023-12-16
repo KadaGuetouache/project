@@ -16,10 +16,19 @@ const cartSlice = createSlice( {
 		loginFail: ( state ) => { 
 			state.error = true;
 			state.isFetching = false;
-		}
+		},
+		registerStart: ( state ) => { state.isFetching = true },
+		registerSuccess: ( state, action ) => { 
+			state.currentUser = action.payload
+			state.error = false
+			state.isFetching = false
+		},
+		registerFail: ( state ) => { 
+			state.error = true
+			state.isFetching = false
+		},
 	}
 } )
 
-export const { loginStart, loginSuccess, loginFail } = cartSlice.actions
-
+export const { loginStart, loginSuccess, loginFail, registerStart, registerSuccess, registerFail } = cartSlice.actions
 export default cartSlice.reducer; 

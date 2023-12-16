@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
 	const cart = useSelector( state => state.cart )
+	const user = useSelector( state => state.user.currentUser )
 
   return (
     <div className="container">
@@ -22,8 +23,18 @@ const Navbar = () => {
 					</Link>
         </div>
         <div className="right">
-          <Link to="/register">Register</Link>
-          <Link to="/login">Log In</Link>
+					{ user ?  (
+						<>
+							<Link to="/favorie">Favorite</Link>
+							<Link to="/profile">Profile</Link>
+						</>
+					) : ( 
+						<>
+							<Link to="/register">Register</Link>
+							<Link to="/login">Log In</Link>
+						</>
+					)
+					}
           <div className="shopping-cart">
             <Link to="/cart">
               <svg
