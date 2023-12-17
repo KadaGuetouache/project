@@ -52,9 +52,14 @@ const cartSlice = createSlice( {
 			if ( state.quantity > 0 ) { 
 				state.quantity -= 1
 			}
+		},
+		deleteAllProducts: ( state, action ) => { 
+			state.products = [  ]
+			state.quantity = 0
+			state.total = 0
 		}
 	}
 } )
 
-export const { addProduct, updateSingleProduct, removeSingleProduct } = cartSlice.actions;
+export const { addProduct, updateSingleProduct, removeSingleProduct, deleteAllProducts } = cartSlice.actions;
 export default cartSlice.reducer; 

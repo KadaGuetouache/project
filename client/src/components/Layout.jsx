@@ -6,13 +6,13 @@ import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <div style={ { minHeight: "100%" } }>
       <Announcement />
       <Navbar />
       {children}
       <Newsletter />
       <Footer />
-    </>
+    </div>
   );
 };
 

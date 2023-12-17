@@ -1,21 +1,43 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "../styles/products.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../store/cartSlice";
 import seedrandom from "seedrandom";
+import Notification from "./Notification";
 
 const Product = ({ item }) => {
 	const dispatch = useDispatch(  );
+	const currentUser = useSelector( state => state.user.currentUser )
+	const products = useSelector( state => state.cart.products )
+	const [ notify, setNotify ] = useState( { display: null, type: null, message: null } )
+
+	const updateNotification = (  ) => { 
+			return setNotify( { display: null, type: null, message: null } )
+	}
 
 	// TODO: fix adding the same product result in two products in cart with the same variation
 	const handleAddProductToCart = useCallback( (  ) => { 
 		const orderId = seedrandom( item._id + item.color + item.size )().toString(  )
-		dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ] } ) )
-	}, [  ])
+		const userId = currentUser && currentUser._id
+
+		if ( products.length > 0 ) { 
+			const index = products.map( product => product.orderId ).indexOf( orderId )
+
+			if ( index === -1 ) { 
+				dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ], userId: userId } ) )
+			} else { 
+				setNotify( { display: true, type: "info", message: "Item already in cart!" } )
+			}
+		} else { 
+			dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ], userId: userId } ) )
+		}
+
+	}, [ dispatch, item, currentUser, products ])
 
   return (
     <div className="product">
+		{ notify.display && <Notification display={ notify.display } type={ notify.type } message={ notify.message } updateNotification={ updateNotification } /> }
       <div className="content">
         <img src={item.img} alt="" />
         <div className="icons">

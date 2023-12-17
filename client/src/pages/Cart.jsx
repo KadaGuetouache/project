@@ -20,8 +20,8 @@ const Cart = () => {
 	const navigate = useNavigate(  );
 
 	useEffect( (  ) => { 
-		if ( location.search === "?success=true" ){ 
-		navigate( "/success", { cart: cart } );
+		if ( location.search == "?success=true" ){ 
+		navigate( "/success", { state: { valid: true } } );
 		}
 	}, [ location, navigate, cart ] )
 

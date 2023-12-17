@@ -37,12 +37,11 @@ const Products = ( { category, filters, sort } ) => {
 	}, [ sort ] )
 
   return (
-		<>
-			{ loading ? ( 
-				<Spinner />
-			) : ( 
-				<div className="products-container">
-					{ category ? ( 
+			<div className="products-container" style={ { minHeight: "400px" } }>
+				{ loading ? ( 
+					<Spinner />
+				) : ( 
+					 category ? ( 
 						filteredProducts.map((product) => (
 							<Product item={product} key={product._id} />
 						))
@@ -50,11 +49,9 @@ const Products = ( { category, filters, sort } ) => {
 						products.map((product) => (
 							<Product item={product} key={product._id} />
 						))
-					) }
-				</div>
-			) }
-			
-		</>
+					) 
+				) }		
+			</div>
   );
 };
 
