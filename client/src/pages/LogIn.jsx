@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import { login } from "../store/apiCall.js";
 import { useDispatch } from "react-redux";
 import Notification from "../components/Notification.jsx";
+import { userRequest } from "../requests";
+import { BASE_URL } from "../constants/api";
+import { updateCart } from "../store/cartSlice";
 
 const LogIn = () => {
 	const [ userName, setUserName ] = useState( "" )
@@ -16,6 +19,7 @@ const LogIn = () => {
 	const { isFetching } = useSelector( state => state.user )
 	const dispatch = useDispatch(  )
 
+	//NOTE: fetching cart en login
 	useEffect( (  ) => { 
 		if ( error ) { 
 			setNotify( { display: true, type: "error", message: error } )
@@ -26,9 +30,16 @@ const LogIn = () => {
 		event.preventDefault(  )
 
 		login( dispatch, { userName, password } )
-			.then( response => { 
+			.then( async response => { 
 				if ( response.code === "ERR_BAD_REQUEST" ){ 
-					setError( response.response.data )
+					return setError( response.response.data )
+				}
+
+				if ( response?._id ) { 
+					const res = await userRequest.get( `${ BASE_URL }/cart/find/${ response._id }` )
+					if ( res.data.length !== 0 ) { 
+						dispatch( updateCart( res.data[ 0 ] ) )
+					}
 				}
 			} )
 	}

@@ -4,14 +4,32 @@ import "../styles/navbar.scss";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../store/userSlice";
+import { deleteAllProducts } from "../store/cartSlice";
+import { userRequest } from "../requests";
+import { BASE_URL } from "../constants/api";
 
 const Navbar = () => {
-	const cart = useSelector( state => state.cart )
+	let cart = useSelector( state => state.cart )
 	const currentUser = useSelector( state => state.user.currentUser )
 	const dispatch = useDispatch(  )
 
+	// NOTE update disconnec and delete cart state and push to cart db
 	const disconnect = (  ) => {
-		dispatch( logoutUser(  ) )
+		cart = { ...cart, userId: currentUser._id }
+		uploadToRemoteCart(  )
+
+		setTimeout( (  ) => { 
+			dispatch( logoutUser(  ) )
+			dispatch( deleteAllProducts(  ) )
+		}, [ 1000 ] )
+	}
+
+	const uploadToRemoteCart = async () => { 
+		try{ 
+			const response = await userRequest.post( `${ BASE_URL }/cart/`, cart )	
+		} catch ( error ) { 
+			console.log( error )	
+		}
 	}
 
   return (

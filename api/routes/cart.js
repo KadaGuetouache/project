@@ -4,11 +4,17 @@ const { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } = requir
 
 // Create new cart
 router.post( "/", verifyToken, async ( req, res ) => { 
+	const { userId, quantity, total } = req.body;
 	const newCart = new Cart( req.body );
+	console.log( "here",req.body )
 
 	try{ 
-		const savedCart = await newCart.save();
-		res.status( 200 ).json( savedCart )
+		await Cart.deleteMany( { userId } )
+		if ( quantity !== 0 && total !== 0 ) { 
+			const savedCart = await newCart.save();
+			res.status( 200 ).json( savedCart )
+		}
+		res.status( 200 )
 	} catch ( error ) { 
 		res.status( 500 ).json( error )
 	}

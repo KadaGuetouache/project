@@ -16,32 +16,37 @@ const Success = (  ) => {
 	const navigate = useNavigate(  )
 	const location = useLocation(  )
 
-	// send order to api
-	useEffect( (  ) => { 
-		const createOrder = async (  ) => { 
+	console.log( 'loop' )
+
+	//FIXME: send 2 orders to api
+	const createOrder = async (  ) => { 
+		if ( orderId === null ) { 
 			try{ 
-				const response = await userRequest.post( `${ BASE_URL }/order`, { 
-					userId: currentUser._id,
-					amount: cart.total,
-					products: cart.products.map( product => ( { 
-						productId: product._id,
-						quantity: product.quantity,
-					} ) ),
-				} )
-				setOrderId( response.data._id )
+					const response = await userRequest.post( `${ BASE_URL }/order`, { 
+						userId: currentUser._id,
+						amount: cart.total,
+						products: cart.products.map( product => ( { 
+							productId: product._id,
+							quantity: product.quantity,
+							color: product.color,
+							price: product.price,
+							size: product.size,
+						} ) ),
+					} )
+					setOrderId( response.data._id )
 			} catch ( error ) { 
 				console.log( error )
 			}
 		}
-		// if user tried to access this component through url will be redirected
-		if ( !location?.state?.valid ) { 
-			navigate( "/lost" )
-		} else { 
-		// if user is been redirected from cart page then procceed
-			location?.state?.valid && createOrder(  )
-		}
+	}
 
-	}, [ cart, currentUser, navigate, location ] )
+	// if user tried to access this component through url will be redirected
+	if ( !location?.state?.valid ) { 
+		navigate( "/lost" )
+	} else { 
+	// if user is been redirected from cart page then procceed
+		location?.state?.valid && createOrder(  )
+	}
 
 	// use useMemo hook to prevent an endless loop 
 	useMemo( (  ) => { 

@@ -5,34 +5,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../store/cartSlice";
 import seedrandom from "seedrandom";
 import Notification from "./Notification";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ item }) => {
 	const dispatch = useDispatch(  );
 	const currentUser = useSelector( state => state.user.currentUser )
 	const products = useSelector( state => state.cart.products )
 	const [ notify, setNotify ] = useState( { display: null, type: null, message: null } )
+	const navigate = useNavigate(  )
 
 	const updateNotification = (  ) => { 
 			return setNotify( { display: null, type: null, message: null } )
 	}
 
-	// TODO: fix adding the same product result in two products in cart with the same variation
+	// NOTE: fix need to be logged in first to add to cart from categories item
 	const handleAddProductToCart = useCallback( (  ) => { 
-		const orderId = seedrandom( item._id + item.color + item.size )().toString(  )
-		const userId = currentUser && currentUser._id
+		if ( currentUser ) { 
+			const orderId = seedrandom( item._id + item.color + item.size )().toString(  )
+			const userId = currentUser && currentUser._id
 
-		if ( products.length > 0 ) { 
-			const index = products.map( product => product.orderId ).indexOf( orderId )
+			if ( products.length > 0 ) { 
+				const index = products.map( product => product.orderId ).indexOf( orderId )
 
-			if ( index === -1 ) { 
-				dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ], userId: userId } ) )
+				if ( index === -1 ) { 
+					dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ], userId: userId } ) )
+				} else { 
+					setNotify( { display: true, type: "info", message: "Item already in cart!" } )
+				}
 			} else { 
-				setNotify( { display: true, type: "info", message: "Item already in cart!" } )
+				dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ], userId: userId } ) )
 			}
 		} else { 
-			dispatch( addProduct( { ...item, orderId: orderId, quantity: 1, color: item.color[ 0 ], size: item.size[ 0 ], userId: userId } ) )
+			navigate( "/login" )
 		}
-
 	}, [ dispatch, item, currentUser, products ])
 
   return (

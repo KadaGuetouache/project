@@ -19,7 +19,7 @@ function App() {
         <Route path="product/:id" element={<Product />} />
         <Route path="cart" element={!user ? <Navigate to="/login" replace /> : <Cart />} />
         <Route path="success" element={!user ? <Navigate to="/login" replace /> : <Success />} />
-        <Route path="login" element={user ? <Navigate to="/" replace /> : <LogIn />} />
+				<Route path="login" element={user ? <Navigate to="/" replace /> : <LogIn />} />
         <Route path="register" element={user ? <Navigate to="/" replace /> : <Register />} />
         <Route path="*" element={ <NotFound />} />
       </Routes>

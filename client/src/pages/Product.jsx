@@ -5,8 +5,9 @@ import "../styles/product-page.scss";
 import Spinner from "../components/Spinner";
 import {BASE_URL} from "../constants/api";
 import axios from "axios"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../store/cartSlice.js";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
   const INCREASE = "increase";
@@ -19,6 +20,8 @@ const Product = () => {
 	const [ size, setSize ] = useState( "" );
 	const dispatch = useDispatch(  )
 	const id = useLocation(  ).pathname.split( "/" )[ 2 ]
+	const currentUser = useSelector( state => state.user.useSelector )
+	const navigate = useNavigate(  )
 
 	// Fetch product data on page load
 	useEffect( (  ) => { 
@@ -47,7 +50,11 @@ const Product = () => {
 
 	// handle submit
 	const handleSubmit = (  ) => { 
-		dispatch( addProduct( { ...product, color, size, quantity } ) )		
+		{ currentUser ? ( 
+			dispatch( addProduct( { ...product, color, size, quantity } ) )		
+		) : ( 
+			navigate( "/login" )
+		) }
 	}
 
   return (
