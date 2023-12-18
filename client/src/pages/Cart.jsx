@@ -7,6 +7,7 @@ import axios from "axios";
 import { BASE_URL } from "../constants/api.js";
 import { loadStripe } from "@stripe/stripe-js"
 import { useLocation, useNavigate } from "react-router-dom";
+import EmptyCart from "../constants/EmptyCart";
 
 const Cart = () => {
 	const products = useSelector( state => state.cart.products )
@@ -54,7 +55,8 @@ const Cart = () => {
 							<SingleProduct item={ product } key={ product._id }/>
 						) ) ) : ( 
 							<div className="msg">
-								<p>It seems like there is nothing here!</p>
+								<h1 style={ { fontWeight: 300 } }>It seems like there is nothing here!</h1>
+								<EmptyCart />
 							</div>
 						)
 						}

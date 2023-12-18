@@ -6,7 +6,6 @@ const { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } = requir
 router.post( "/", verifyToken, async ( req, res ) => { 
 	const { userId, quantity, total } = req.body;
 	const newCart = new Cart( req.body );
-	console.log( "here",req.body )
 
 	try{ 
 		await Cart.deleteMany( { userId } )

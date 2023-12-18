@@ -1,32 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Search from "./Search";
 import "../styles/navbar.scss";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../store/userSlice";
 import { deleteAllProducts } from "../store/cartSlice";
-import { userRequest } from "../requests";
+import axios from "axios";
 import { BASE_URL } from "../constants/api";
+import { deleteAllFavorite } from "../store/favoriteSlice";
 
 const Navbar = () => {
 	let cart = useSelector( state => state.cart )
+	let favoriteProducts = useSelector( state => state.favorite.products )
 	const currentUser = useSelector( state => state.user.currentUser )
 	const dispatch = useDispatch(  )
 
-	// NOTE update disconnec and delete cart state and push to cart db
+	const headers = { 
+		token: `Bearer ${ currentUser?.accessToken }`,
+		"Content-Type": "application/json",
+	}
+
+
 	const disconnect = (  ) => {
 		cart = { ...cart, userId: currentUser._id }
+		favoriteProducts = { products: favoriteProducts,  userId: currentUser._id }
 		uploadToRemoteCart(  )
+		updloadToRemoteFavoriteList(  )
 
 		setTimeout( (  ) => { 
 			dispatch( logoutUser(  ) )
 			dispatch( deleteAllProducts(  ) )
+			dispatch( deleteAllFavorite(  ) )
 		}, [ 1000 ] )
 	}
 
 	const uploadToRemoteCart = async () => { 
 		try{ 
-			const response = await userRequest.post( `${ BASE_URL }/cart/`, cart )	
+			const response = await axios.post( `${ BASE_URL }/cart/`, cart, { headers: headers } )	
+		} catch ( error ) { 
+			console.log( error )	
+		}
+	}
+
+	const updloadToRemoteFavoriteList = async (  ) => { 
+		try{ 
+			const response = await axios.post( `${ BASE_URL }/favorite/`, favoriteProducts, { headers: headers } )	
 		} catch ( error ) { 
 			console.log( error )	
 		}
@@ -49,7 +67,7 @@ const Navbar = () => {
         <div className="right">
 					{ currentUser ?  (
 						<>
-							<Link to="/favorie">Favorite</Link>
+							<Link to="/favorite">Favorite</Link>
 							<Link to="/profile">Profile</Link>
 						</>
 					) : ( 

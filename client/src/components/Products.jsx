@@ -4,11 +4,13 @@ import "../styles/products.scss";
 import Spinner from "./Spinner";
 import axios from "axios";
 import { BASE_URL } from "../constants/api";
+import { useSelector } from "react-redux";
 
 const Products = ( { category, filters, sort } ) => {
 	const [ loading, setLoading ] = useState( true )
 	const [ products, setProducts ] = useState( [  ] )
 	const [ filteredProducts, setFilteredProducts ] = useState( [  ] )
+	const [ favoriteProducts, setFavoriteProducts ] = useSelector( state => state.favorite.products )
 
 	useEffect( (  ) => { 
 		const getProducts = async (  ) => { 

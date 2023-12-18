@@ -24,12 +24,17 @@
 
 						.msg {
 							display: flex;
-							justify-content: center;
+							flex-direction: column;
 							align-items: center;
 							height: 100%;
 
-							p{
-								font-size: 1.5rem;
+							svg{
+								width: 80%;
+								height: 80%;
+							}
+
+							h1{
+								margin-bottom: 100px;
 							}
 						}
         }

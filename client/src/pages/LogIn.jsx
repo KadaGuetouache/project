@@ -8,8 +8,10 @@ import { login } from "../store/apiCall.js";
 import { useDispatch } from "react-redux";
 import Notification from "../components/Notification.jsx";
 import { userRequest } from "../requests";
+import axios from "axios";
 import { BASE_URL } from "../constants/api";
 import { updateCart } from "../store/cartSlice";
+import { updateFavorite } from "../store/favoriteSlice";
 
 const LogIn = () => {
 	const [ userName, setUserName ] = useState( "" )
@@ -19,7 +21,6 @@ const LogIn = () => {
 	const { isFetching } = useSelector( state => state.user )
 	const dispatch = useDispatch(  )
 
-	//NOTE: fetching cart en login
 	useEffect( (  ) => { 
 		if ( error ) { 
 			setNotify( { display: true, type: "error", message: error } )
@@ -31,14 +32,32 @@ const LogIn = () => {
 
 		login( dispatch, { userName, password } )
 			.then( async response => { 
-				if ( response.code === "ERR_BAD_REQUEST" ){ 
+				if ( response.code === "ERR_BAD_REQUEST" ) { 
 					return setError( response.response.data )
 				}
 
 				if ( response?._id ) { 
-					const res = await userRequest.get( `${ BASE_URL }/cart/find/${ response._id }` )
+					// Fetch cart
+					const res = await axios.get( `${ BASE_URL }/cart/find/${ response._id }`, { 
+						headers: { 
+							token: `Bearer ${ response?.accessToken }`,
+							"Content-Type": "application/json",
+						}
+					} )
+
 					if ( res.data.length !== 0 ) { 
 						dispatch( updateCart( res.data[ 0 ] ) )
+					}
+
+					// Fetch favorite products
+					const res1 = await axios.get( `${ BASE_URL }/favorite/${ response._id }`, { headers: { 
+							token: `Bearer ${ response?.accessToken }`,
+							"Content-Type": "application/json",
+					} } )
+
+
+					if ( res1.data.length !== 0 ) { 
+						dispatch( updateFavorite( res1.data[ 0 ] ) )
 					}
 				}
 			} )

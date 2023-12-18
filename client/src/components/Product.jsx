@@ -6,6 +6,7 @@ import { addProduct } from "../store/cartSlice";
 import seedrandom from "seedrandom";
 import Notification from "./Notification";
 import { useNavigate } from "react-router-dom";
+import { addProductToFavorite } from "../store/favoriteSlice";
 
 const Product = ({ item }) => {
 	const dispatch = useDispatch(  );
@@ -18,7 +19,6 @@ const Product = ({ item }) => {
 			return setNotify( { display: null, type: null, message: null } )
 	}
 
-	// NOTE: fix need to be logged in first to add to cart from categories item
 	const handleAddProductToCart = useCallback( (  ) => { 
 		if ( currentUser ) { 
 			const orderId = seedrandom( item._id + item.color + item.size )().toString(  )
@@ -39,6 +39,10 @@ const Product = ({ item }) => {
 			navigate( "/login" )
 		}
 	}, [ dispatch, item, currentUser, products ])
+
+	const addToFavorite = ( ) => { 
+		dispatch( addProductToFavorite( item ) )
+	}
 
   return (
     <div className="product">
@@ -78,7 +82,7 @@ const Product = ({ item }) => {
               />
             </svg>
           </Link>
-          <div className="product-like">
+          <div className="product-like" onClick={ addToFavorite }>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

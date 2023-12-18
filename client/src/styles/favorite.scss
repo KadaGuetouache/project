@@ -1,0 +1,231 @@
+@import 'mixin.scss';
+
+.favorite-products-container{
+
+    h2{
+        text-align: center;
+        margin-top: 5rem;
+    }
+
+		.favorite-product-container{
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			padding: 1rem 3rem;
+			border-bottom: 1px solid gray;
+			margin-bottom: 5px;
+			position: relative;
+
+			.close{
+				position: absolute;
+				top: 20%;
+				right: 0%;
+				transform: translate(-50%, -50%);
+				cursor: pointer;
+
+				svg{
+						stroke: black;
+						width: 40px;
+						height: 40px;
+				}
+			}
+
+			@include lg{
+					flex-direction: column;
+					align-items: center;
+			}
+
+			.product-image{
+					width: 150px;
+					min-width: 100px;
+
+					img{
+							width: 100%;
+							height: 100%;
+					}
+			}
+
+			.product-info{
+					margin-left: 5rem;
+					display: flex;
+					justify-content: space-between;
+					margin-top: auto;
+					margin-bottom: auto;
+
+					&.wishlist-product{
+							width: 100%;
+					}
+
+					.product-filter{
+							width: 500px;
+					}
+					 .product-order{
+							width: 450px;
+					}
+
+					.product-left{
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+							width: 300px;
+
+							h3, p{
+									margin: 0;
+									margin-bottom: 10px;
+							}
+
+							h3{
+									font-size: 1.5rem;
+							}
+
+							p{
+									font-size: 2.0rem;
+							}
+					}
+
+					@include xl{
+						margin-left: 1rem;
+					}
+
+					@include md{
+						padding: 1rem;
+					}
+
+					.product-title {
+						font-size: 3rem;
+						font-weight: 300;
+						margin-bottom: 3rem;
+						text-transform: uppercase;
+					}
+
+					.product-description{
+						margin-bottom: 2rem;
+					}
+
+					.product-price{
+						font-size: 4rem;
+						font-weight: 100;
+						margin-bottom: 3rem;
+					}
+
+					.product-filter{
+							display: flex; 
+							justify-content: space-between;
+							// justify-self: space-between;
+							// align-items: center;
+							margin-top: auto;
+							margin-bottom: auto;
+
+					@include md{
+							flex-direction: column;
+							align-items: flex-start;
+					}
+
+					.product-size-filter{
+							display: flex;
+							span{ font-size: 1.3rem; }
+
+							.product-size-filter-container{
+								display: flex;								
+								flex-direction: row;
+								margin-left: 20px;
+
+								.size{
+									display: flex;
+									margin-left: 10px;
+									justify-content: center;
+									align-items: center;
+									width: 35px;
+									height: 35px;
+									border: 1px solid gray;
+									border-radius: 50%;
+								}
+							}
+
+							select{
+								margin-left: 3rem;
+								width: 150px;
+								padding: .3rem 1rem;
+								border: 1px solid black;
+								background-color: #fff;
+
+								@include xl{
+										width: 90px;
+								}
+
+								@include md{
+										margin-top: 30px;
+								}
+							}
+					}
+
+					.product-color-filter{
+							display: flex;
+							margin-right: 5rem;
+
+							.color{
+								width: 40px;
+								height: 40px;
+								margin: 0 10px;
+								border-radius: 50%;
+								border: 1px solid gray;
+								cursor: pointer;
+							}
+					}
+					}
+
+					.product-order{
+						display: flex;
+						justify-content: flex-start;
+						align-items: center;
+
+						@include md{
+								flex-direction: column;
+								align-items: flex-start;
+						}
+					}
+			}
+		}
+}
+
+.no-products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10rem 0;
+
+    p{
+        font-size: 4rem;
+        font-weight: 200;
+    }
+
+    .cart-navigation-continue-shopping{
+    text-decoration: none;
+      border: 1px solid black;
+      color: #fff;
+      background-color: #000;
+      text-transform: uppercase;
+      padding: 10px 30px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: .4s ease;
+
+      &:hover{
+        background-color: #fff;
+        color: #000;
+      }
+    }
+}
+
+.favorite-product-not-found{
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+
+	h1{
+		font-weight: 300;
+	}
+}

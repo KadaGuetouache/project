@@ -6,7 +6,7 @@ const NotFound = ( ) => {
 	return(
 		<Layout>
 			<div style={ { display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column",height: "100vh" } }>
-				<h1>It seems like you are lost!</h1>
+				<h1 style={ { fontWeight: 300 } }>It seems like you are lost!</h1>
 				<div style={ { width: "50%", height: "50%", margin: "1rem 0" } }>
 				<NotFoundImg />
 				</div>

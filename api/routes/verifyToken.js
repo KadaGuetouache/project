@@ -7,12 +7,12 @@ const verifyToken = (req, res, next) => {
 		const token = authHeader.split( " " )[ 1 ]
 
 		jwt.verify( token, process.env.JWT_SECRET, (error, user ) => { 
-			if (error) response.status(403).json( "token is not valid!" )
+			if (error) res.status(403).json( "token is not valid!" )
 			req.user = user
 			next();
 		});
 	} else { 
-		return response.status( 401 ).json( "Unauthorized!" )
+		return res.status( 401 ).json( "Unauthorized!" )
 	}
 }
 
