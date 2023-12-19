@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/slider.scss";
 import { slides } from "../data";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Slider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -34,7 +35,7 @@ const Slider = () => {
                 <div className="info-container">
                   <h3>{slide.title}</h3>
                   <p>{slide.description}</p>
-                  <button>show now</button>
+                  <Link className="link" to={ `products/${ slide.category }`}>show now</Link>
                 </div>
               </div>
             </div>

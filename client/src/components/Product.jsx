@@ -38,10 +38,10 @@ const Product = ({ item }) => {
 		} else { 
 			navigate( "/login" )
 		}
-	}, [ dispatch, item, currentUser, products ])
+	}, [ dispatch, item, currentUser, products, navigate ])
 
 	const addToFavorite = ( ) => { 
-		dispatch( addProductToFavorite( item ) )
+		currentUser ? dispatch( addProductToFavorite( item ) ) : navigate( "/login" )
 	}
 
   return (

@@ -4,18 +4,21 @@ export const slides = [
     img: "./images/1.jpg",
     title: "Winter Sales",
     description: "Don't comprise on style! get flat 30% off for new arrivals",
+		category: "winter"
   },
   {
     id: 2,
     img: "./images/2.jpg",
     title: "Elevate your Style",
     description: "Embrace the beauty of fall with latest collections",
+		category: "fashion"
   },
   {
     id: 3,
     img: "./images/3.jpg",
     title: "End of Season Sale",
     description: "Take advantage of incredible savings on our selection of fall",
+		category: "women"
   }
 ]
 
@@ -24,7 +27,7 @@ export const categories = [
     id: 1,
     img: "https://images.pexels.com/photos/14344832/pexels-photo-14344832.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "WOMEN FASHION",
-    category: "women"
+    category: "women",
   },
   {
     id: 2,

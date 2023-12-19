@@ -9,12 +9,14 @@ import Success from "./pages/Success";
 import NotFound from "./pages/NotFound";
 import Favorite from "./pages/Favorite";
 import Profile from "./pages/Profile";
+import ScrollToTop from "./components/ScrollToTop";
 import { useSelector } from "react-redux";
 
 function App() {
 	const user = useSelector( state => state.user.currentUser )
   return (
     <Router>
+			<ScrollToTop />
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="products/:category" element={<ProductList />} />
