@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../store/userSlice";
 import { deleteAllProducts } from "../store/cartSlice";
-import axios from "axios";
-import { BASE_URL } from "../constants/api";
 import { deleteAllFavorite } from "../store/favoriteSlice";
+import { uploadToRemoteCart, uploadToRemoteFavoriteList } from "../store/apiCall";
 
 const Navbar = () => {
 	let cart = useSelector( state => state.cart )
@@ -24,30 +23,14 @@ const Navbar = () => {
 	const disconnect = (  ) => {
 		cart = { ...cart, userId: currentUser._id }
 		favoriteProducts = { products: favoriteProducts,  userId: currentUser._id }
-		uploadToRemoteCart(  )
-		updloadToRemoteFavoriteList(  )
+		uploadToRemoteCart( headers, cart )
+		uploadToRemoteFavoriteList( headers, favoriteProducts )
 
 		setTimeout( (  ) => { 
 			dispatch( logoutUser(  ) )
 			dispatch( deleteAllProducts(  ) )
 			dispatch( deleteAllFavorite(  ) )
 		}, [ 1000 ] )
-	}
-
-	const uploadToRemoteCart = async () => { 
-		try{ 
-			const response = await axios.post( `${ BASE_URL }/cart/`, cart, { headers: headers } )	
-		} catch ( error ) { 
-			console.log( error )	
-		}
-	}
-
-	const updloadToRemoteFavoriteList = async (  ) => { 
-		try{ 
-			const response = await axios.post( `${ BASE_URL }/favorite/`, favoriteProducts, { headers: headers } )	
-		} catch ( error ) { 
-			console.log( error )	
-		}
 	}
 
   return (

@@ -3,11 +3,10 @@ import { useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/product-page.scss";
 import Spinner from "../components/Spinner";
-import {BASE_URL} from "../constants/api";
-import axios from "axios"
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../store/cartSlice.js";
 import { useNavigate } from "react-router-dom";
+import { getSingleProduct } from "../store/apiCall";
 
 const Product = () => {
   const INCREASE = "increase";
@@ -26,15 +25,13 @@ const Product = () => {
 	// Fetch product data on page load
 	useEffect( (  ) => { 
 		const getProduct = async (  ) => { 
-			try{ 
-				const response = await axios.get( `${ BASE_URL }/product/find/${ id }` )
-				setProduct( response.data )
-				setColor( response.data.color[ 0 ] )
-				setSize( response.data.size[ 0 ] )
-				setLoading( false )
-			} catch ( error ){ 
-				console.log( error )
-			}
+			getSingleProduct( id )
+				.then( response => { 
+					setProduct( response.data )
+					setColor( response.data.color[ 0 ] )
+					setSize( response.data.size[ 0 ] )
+					setLoading( false )
+				} )
 		}
 		getProduct(  )
 	}, [ id ] )

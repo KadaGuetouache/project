@@ -91,3 +91,76 @@ export const updateUserProfile = async ( currentUser, user, dispatch ) => {
     }
 }
 
+export const uploadToRemoteCart = async ( headers, cart ) => { 
+		try{ 
+			const response = await axios.post( `${ BASE_URL }/cart/`, cart, { headers: headers } )	
+		} catch ( error ) { 
+			console.log( error )	
+		}
+}
+
+export const uploadToRemoteFavoriteList = async ( headers, favoriteProducts ) => { 
+		try{ 
+			const response = await axios.post( `${ BASE_URL }/favorite/`, favoriteProducts, { headers: headers } )	
+		} catch ( error ) { 
+			console.log( error )	
+		}
+}
+
+export const getAllProducts = async ( category ) => { 
+	try{ 
+			const response = await axios.get( category !== "all" && category !== undefined ? 
+			`${ BASE_URL }/product?category=${ category }` : `${ BASE_URL }/product` )
+			return response
+	} catch ( error ) { 
+		console.log( error )
+	}
+}
+
+export const checkoutToStripe = async ( stripe, products, fastShipping, expressShipping ) => { 
+	try{ 
+		const response = await axios.post( `${ BASE_URL }/checkout/payment`, { products, fastShipping, expressShipping });
+
+		const session = await response.data;
+
+		const result = stripe.redirectToCheckout( { sessionId: session.id } )
+		console.log( result )
+	} catch ( error ){ 
+		console.log( error );
+	}
+}
+
+export const getSingleProduct = async ( id ) => { 
+		try{ 
+			const response = await axios.get( `${ BASE_URL }/product/find/${ id }` )
+			return response
+		} catch ( error ){ 
+			console.log( error )
+		}
+}
+
+export const getCart = async ( user ) => { 
+	try{ 
+		const response = await axios.get( `${ BASE_URL }/cart/find/${ user._id }`, { 
+			headers: { 
+				token: `Bearer ${ user?.accessToken }`,
+				"Content-Type": "application/json",
+			}
+		} )
+		return response
+	} catch ( error ) { 
+		console.log( error )
+	}
+}
+
+export const getFavoriteList = async ( user ) => { 
+	try{ 
+		const response = await axios.get( `${ BASE_URL }/favorite/${ user._id }`, { headers: { 
+				token: `Bearer ${ user?.accessToken }`,
+				"Content-Type": "application/json",
+		} } )
+		return response
+	} catch ( error ) { 
+		console.log( error )
+	}
+}

@@ -3,20 +3,17 @@ import Layout from "../components/Layout";
 import SingleProduct from "../components/SingleProduct";
 import "../styles/cart.scss";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import { BASE_URL } from "../constants/api.js";
 import { loadStripe } from "@stripe/stripe-js"
 import { useLocation, useNavigate } from "react-router-dom";
 import EmptyCart from "../constants/EmptyCart";
+import { checkoutToStripe } from "../store/apiCall";
 
 const Cart = () => {
 	const products = useSelector( state => state.cart.products )
 	const cart = useSelector( state => state.cart )
-	let total = 0;
 	let subTotal = cart.total;
 	const expressShipping = 334;
 	const fastShipping = 47;
-	const freeShipping = 0;
 	const location = useLocation(  );
 	const navigate = useNavigate(  );
 
@@ -30,17 +27,7 @@ const Cart = () => {
 	// Make purchase with stripe
 	const makePayment = async (  ) => { 
 		const stripe = await loadStripe( "pk_test_el3DpfhvKo8bjpw2OV3hkR7m00XpKKP3pU" );
-
-		try{ 
-			const response = await axios.post( `${ BASE_URL }/checkout/payment`, { products, fastShipping, expressShipping });
-
-			const session = await response.data;
-
-			const result = stripe.redirectToCheckout( { sessionId: session.id } )
-			console.log( result )
-		} catch ( error ){ 
-			console.log( error );
-		}
+		checkoutToStripe( stripe, products, fastShipping, expressShipping )
 	}
 
 

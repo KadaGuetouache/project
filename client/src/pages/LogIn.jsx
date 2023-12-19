@@ -7,9 +7,7 @@ import { useSelector } from "react-redux";
 import { login } from "../store/apiCall.js";
 import { useDispatch } from "react-redux";
 import Notification from "../components/Notification.jsx";
-import { userRequest } from "../requests";
-import axios from "axios";
-import { BASE_URL } from "../constants/api";
+import { getCart, getFavoriteList } from "../store/apiCall.js";
 import { updateCart } from "../store/cartSlice";
 import { updateFavorite } from "../store/favoriteSlice";
 
@@ -38,27 +36,20 @@ const LogIn = () => {
 
 				if ( response?._id ) { 
 					// Fetch cart
-					const res = await axios.get( `${ BASE_URL }/cart/find/${ response._id }`, { 
-						headers: { 
-							token: `Bearer ${ response?.accessToken }`,
-							"Content-Type": "application/json",
-						}
-					} )
-
-					if ( res.data.length !== 0 ) { 
-						dispatch( updateCart( res.data[ 0 ] ) )
-					}
+					getCart( response )
+						.then( res => { 
+								if ( res.data.length !== 0 ) { 
+									dispatch( updateCart( res.data[ 0 ] ) )
+								}
+						} )
 
 					// Fetch favorite products
-					const res1 = await axios.get( `${ BASE_URL }/favorite/${ response._id }`, { headers: { 
-							token: `Bearer ${ response?.accessToken }`,
-							"Content-Type": "application/json",
-					} } )
-
-
-					if ( res1.data.length !== 0 ) { 
-						dispatch( updateFavorite( res1.data[ 0 ] ) )
-					}
+					getFavoriteList( response )
+						.then( res => { 
+							if ( res.data.length !== 0 ) { 
+								dispatch( updateFavorite( res.data[ 0 ] ) )
+							}
+						} )
 				}
 			} )
 	}
