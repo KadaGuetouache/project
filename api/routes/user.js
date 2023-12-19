@@ -6,15 +6,16 @@ const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require( "./verifyT
 
 router.put( "/:id", verifyTokenAndAuthorization, async ( req, res ) => { 
 
-	if ( req.body.password ) { 
-		req.body.password = cryptoJS.AES.decrypt( req.body.password, process.env.PASS_TOKEN ).toString();
+	const user = { 
+		username: req.body.userName,
+		firstname: req.body.firstName,
+		lastname: req.body.lastName,
+		email: req.body.email,
+		password: cryptoJS.AES.encrypt( req.body.password, process.env.PASS_TOKEN ).toString(  ),
 	}
 
 	try{ 
-		const updatedUser = await User.findByIdAndUpdate( req.params.id, { 
-			$set: req.body	
-		}, { new: true } );
-
+		const updatedUser = await User.findByIdAndUpdate( { _id: req.params.id }, { $set: user }, { new: true });
 		res.status( 200 ).json( updatedUser )
 	} catch ( error ) { 
 		response.status( 500 ).json( error )

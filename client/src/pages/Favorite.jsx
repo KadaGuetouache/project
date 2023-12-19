@@ -1,9 +1,9 @@
 import React from "react";
-import "../styles/favorite.scss";
 import Layout from "../components/Layout";
 import SingleFavoriteProduct from "../components/SingleFavoriteProduct";
 import { useSelector } from "react-redux";
 import Shopping from "../constants/Shopping";
+import "../styles/favorite.scss";
 
 const Favorite = ( ) => {
 	const products = useSelector( state => state.favorite.products )

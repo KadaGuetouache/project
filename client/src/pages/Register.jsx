@@ -27,6 +27,7 @@ const Register = () => {
 	const handleSubmit = ( event ) => { 
 		event.preventDefault(  )
 
+		// TODO: make register redirect to login page and remove user state
 		// Safe guards for empty fields and mismatch passwords
 		if ( firstName == null || lastName == null || userName == null|| email == null || password == null || confirmPassword == null ) { 
 			return setNotify( { display: true, type: "error", message: "Fields must not be empty" } )
@@ -58,7 +59,7 @@ const Register = () => {
 		// Redirect to login page
 		setTimeout( (  ) => { 
 			navigate( "/login" )
-		}, [ 5000 ] )
+		}, [ 2000 ] )
 	}
 
 	const updateNotification = (  ) => { 

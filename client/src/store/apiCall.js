@@ -1,4 +1,4 @@
-import { loginFail, loginStart, loginSuccess, registerStart, registerSuccess, registerFail } from "./userSlice.js";
+import { loginFail, loginStart, loginSuccess, registerStart, registerSuccess, registerFail, updateProfileStart, updateProfile, updateProfileError } from "./userSlice.js";
 import { deleteAllProducts } from "./cartSlice.js";
 import axios from "axios";
 import { BASE_URL } from "../constants/api.js";
@@ -68,6 +68,25 @@ export const removeFavoriteProduct = async (user, productId) => {
         })
         return response
     } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateUserProfile = async ( currentUser, user, dispatch ) => { 
+		dispatch( updateProfileStart(  ) )
+    try {
+			const response = await axios.put( `${ BASE_URL }/user/${ currentUser._id }`, user,{ 
+				headers: { 
+					token: `Bearer ${ currentUser.accessToken }`,
+					"Content-Type": "application/json",
+				}
+			} )
+
+			let updatedUser = response.data
+			updatedUser = { ...updatedUser, accessToken: currentUser.accessToken }
+			dispatch( updateProfile( updatedUser ) )
+    } catch (error) {
+			dispatch( updateProfileError(  ) )
         console.log(error);
     }
 }

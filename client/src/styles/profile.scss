@@ -1,0 +1,79 @@
+@import 'mixin.scss';
+.account-container{
+	width: 80%;
+	margin: 0 auto;
+}
+
+.account-container{
+	.content{
+			padding: 3rem;
+			background-color: #fff;
+			width: 800px;
+			margin: 0 auto;
+			z-index: 2;
+
+			h2{
+					font-size: 3rem;
+					font-weight: 300;
+					text-transform: uppercase;
+					margin-bottom: 3rem;
+			}
+
+			form .input-container{
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					flex-wrap: wrap;
+
+					input{
+							width: 48%;
+							padding: .5rem;
+							border: 1px solid gray;
+							border-radius: 5px;
+							margin-bottom: 1rem;
+
+							@include md{
+									width: 100%;
+							}
+					}
+			}
+
+			.form-submit{
+					.form-agreement{
+							display: flex;
+							align-items: center;
+							justify-content: center;
+
+							input[type="checkbox"]{
+									width: 20px;
+									height: 20px;
+							}
+
+							p{
+									margin-left: 30px;
+
+									a{
+											text-decoration: none;
+											font-weight: bolder;
+											color: #000;
+									}
+							}
+					}
+
+					button[type="submit"]{
+							margin-top: 20px;
+							padding: 10px 30px;
+							border: none;
+							background-color: teal;
+							color: white;
+							font-size: 1.1rem;
+							cursor: pointer;
+
+							&:disabled{
+									background-color: gray;
+									cursor: default;
+							}
+					}
+			}
+	}
+}

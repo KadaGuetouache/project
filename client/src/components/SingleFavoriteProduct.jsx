@@ -1,8 +1,8 @@
 import React from "react"
-import "../styles/favorite.scss";
 import { useDispatch } from "react-redux";
 import { removeSingleFavoriteProduct } from "../store/favoriteSlice";
 import { Link } from "react-router-dom";
+import "../styles/favorite.scss";
 
 const SingleFavoriteProduct = ( { product } ) => {
 
