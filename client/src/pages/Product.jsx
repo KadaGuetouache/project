@@ -56,7 +56,11 @@ const Product = () => {
 
   return (
     <Layout>
-			{ loading ? ( <Spinner /> ) : ( 
+			{ loading ? ( 
+			<div style={ { margin: "0 auto" } }>
+				<Spinner /> 
+			</div>
+			) : ( 
 				<div className="product-container">
 					<div className="product-image">
 						<img src={product.img} alt="" />

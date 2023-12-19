@@ -39,7 +39,9 @@ const Products = ( { category, filters, sort } ) => {
   return (
 			<div className="products-container" style={ { minHeight: "400px" } }>
 				{ loading ? ( 
-					<Spinner />
+					<div style={ { width: "100vw", margin: "0 auto" } }>
+						<Spinner />
+					</div>
 				) : ( 
 					 category ? ( 
 						filteredProducts.map((product) => (
