@@ -7,6 +7,7 @@ import { logoutUser } from "../store/userSlice";
 import { deleteAllProducts } from "../store/cartSlice";
 import { deleteAllFavorite } from "../store/favoriteSlice";
 import { uploadToRemoteCart, uploadToRemoteFavoriteList } from "../store/apiCall";
+import { unSetProducts } from "../store/productSlice";
 
 const Navbar = () => {
 	let cart = useSelector( state => state.cart )
@@ -27,6 +28,7 @@ const Navbar = () => {
 		uploadToRemoteFavoriteList( headers, favoriteProducts )
 
 		setTimeout( (  ) => { 
+			dispatch( unSetProducts(  ) )
 			dispatch( logoutUser(  ) )
 			dispatch( deleteAllProducts(  ) )
 			dispatch( deleteAllFavorite(  ) )

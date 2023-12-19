@@ -19,7 +19,7 @@ const Product = () => {
 	const [ size, setSize ] = useState( "" );
 	const dispatch = useDispatch(  )
 	const id = useLocation(  ).pathname.split( "/" )[ 2 ]
-	const currentUser = useSelector( state => state.user.useSelector )
+	const currentUser = useSelector( state => state.user.currentUser )
 	const navigate = useNavigate(  )
 
 	// Fetch product data on page load
@@ -47,11 +47,7 @@ const Product = () => {
 
 	// handle submit
 	const handleSubmit = (  ) => { 
-		{ currentUser ? ( 
-			dispatch( addProduct( { ...product, color, size, quantity } ) )		
-		) : ( 
-			navigate( "/login" )
-		) }
+		 currentUser ? dispatch( addProduct( { ...product, color, size, quantity } ) )	: navigate( "/login" )
 	}
 
   return (

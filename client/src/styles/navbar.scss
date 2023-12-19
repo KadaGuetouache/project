@@ -34,6 +34,7 @@
 
         input{
             border: none;
+						width: 100%;
 
             &:focus{
                 outline: none;
@@ -97,4 +98,42 @@
     @include md{
         justify-content: center;
     }
+}
+
+.search-container{
+	.search-result{
+		position: absolute;
+		top: 55%;
+		left: 0;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-direction: column;
+		z-index: 10;
+		padding-left: 0;
+		width: 100%;
+		border: 1px solid gray;
+
+		.search-product-container{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		img{
+			width: 50px;
+		}
+
+		li{
+			list-style: none;
+			padding: 1rem;
+			background-color: white;
+			width: 100%;
+
+			a{
+				text-decoration: none;
+				text-align: left;
+				color: black;
+			}
+		}
+	}	
 }

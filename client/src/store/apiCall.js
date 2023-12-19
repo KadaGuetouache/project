@@ -2,6 +2,7 @@ import { loginFail, loginStart, loginSuccess, registerStart, registerSuccess, re
 import { deleteAllProducts } from "./cartSlice.js";
 import axios from "axios";
 import { BASE_URL } from "../constants/api.js";
+import { setProducts } from "./productSlice.js";
 
 export const login = async ( dispatch, user ) => { 
 	dispatch( loginStart(  ) )
@@ -107,11 +108,11 @@ export const uploadToRemoteFavoriteList = async ( headers, favoriteProducts ) =>
 		}
 }
 
-export const getAllProducts = async ( category ) => { 
+export const getAllProducts = async ( category, dispatch ) => { 
 	try{ 
 			const response = await axios.get( category !== "all" && category !== undefined ? 
 			`${ BASE_URL }/product?category=${ category }` : `${ BASE_URL }/product` )
-			return response
+			dispatch( setProducts( response.data ) )
 	} catch ( error ) { 
 		console.log( error )
 	}

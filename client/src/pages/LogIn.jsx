@@ -10,6 +10,7 @@ import Notification from "../components/Notification.jsx";
 import { getCart, getFavoriteList } from "../store/apiCall.js";
 import { updateCart } from "../store/cartSlice";
 import { updateFavorite } from "../store/favoriteSlice";
+import {unSetProducts} from "../store/productSlice";
 
 const LogIn = () => {
 	const [ userName, setUserName ] = useState( "" )
@@ -33,6 +34,8 @@ const LogIn = () => {
 				if ( response.code === "ERR_BAD_REQUEST" ) { 
 					return setError( response.response.data )
 				}
+
+				dispatch( unSetProducts(  ) )
 
 				if ( response?._id ) { 
 					// Fetch cart

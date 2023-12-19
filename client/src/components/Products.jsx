@@ -3,22 +3,23 @@ import Product from "./Product";
 import "../styles/products.scss";
 import Spinner from "./Spinner";
 import { getAllProducts } from "../store/apiCall";
+import { useDispatch, useSelector } from "react-redux";
 
 const Products = ( { category, filters, sort } ) => {
 	const [ loading, setLoading ] = useState( true )
-	const [ products, setProducts ] = useState( [  ] )
+	//const [ products, setProducts ] = useState( [  ] )
+	const products = useSelector( state => state.product.products )
 	const [ filteredProducts, setFilteredProducts ] = useState( [  ] )
+	const dispatch = useDispatch(  )
+
+	console.log( "loop" )
 
 	useEffect( (  ) => { 
-		const getProducts = async (  ) => { 
-			getAllProducts( category )
-				.then( response => { 
-					setProducts( response.data )
-					setLoading( false )
-				} )
-		}
-		getProducts(  )
-	}, [ category ] )
+		if ( products.length === 0 ) { 
+			getAllProducts( category, dispatch )
+			}
+		setLoading( false )
+	}, [ category, dispatch, products ] )
 
 	useEffect( (  ) => { 
 		category && setFilteredProducts( products.filter( product => ( 
@@ -48,7 +49,7 @@ const Products = ( { category, filters, sort } ) => {
 							<Product item={product} key={product._id} />
 						))
 					) : ( 
-						products.map((product) => (
+						products.slice( 0, 8 ).map((product) => (
 							<Product item={product} key={product._id} />
 						))
 					) 
