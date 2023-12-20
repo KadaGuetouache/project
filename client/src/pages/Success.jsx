@@ -16,9 +16,6 @@ const Success = (  ) => {
 	const navigate = useNavigate(  )
 	const location = useLocation(  )
 
-	console.log( 'loop' )
-
-	//FIXME: send 2 orders to api
 	const createOrder = async (  ) => { 
 		if ( orderId === null ) { 
 			try{ 

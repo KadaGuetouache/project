@@ -12,8 +12,6 @@ const Products = ( { category, filters, sort } ) => {
 	const [ filteredProducts, setFilteredProducts ] = useState( [  ] )
 	const dispatch = useDispatch(  )
 
-	console.log( "loop" )
-
 	useEffect( (  ) => { 
 		if ( products.length === 0 ) { 
 			getAllProducts( category, dispatch )
