@@ -11,7 +11,6 @@ const SingleProduct = ( { item } ) => {
 	const [ product, setProduct ] = useState( item )
   const [ quantity, setQuantity ] = useState( product.quantity );
 	const dispatch = useDispatch(  )
-
 	// Control product quantity
   const quantityValueHandler = (operation) => {
     if (operation === INCREASE && quantity < QUANTITIYLIMITER) {
@@ -72,7 +71,7 @@ const SingleProduct = ( { item } ) => {
               ID: <span>{ product._id }</span>
             </strong>
           </p>
-          <div className="product-color" style={{ "background": product.color }}></div>
+          <div className="product-color" style={{ "backgroundColor": product.color }}></div>
           <p>
             <strong>
               Size: <span>{ product.size }</span>

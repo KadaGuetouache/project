@@ -88,7 +88,9 @@
         border-radius: 50%;
         background-color: cornflowerblue;
         color: white;
-        transform: translate(-150%, -100%);
+        position: absolute;
+        top: -30%;
+        right: -40%;
     }
 
 		.diconnect{
