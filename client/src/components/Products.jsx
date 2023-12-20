@@ -13,11 +13,10 @@ const Products = ( { category, filters, sort } ) => {
 	const dispatch = useDispatch(  )
 
 	useEffect( (  ) => { 
-		if ( products.length === 0 ) { 
-			getAllProducts( category, dispatch )
-			}
+		getAllProducts( category, dispatch )
 		setLoading( false )
-	}, [ category, dispatch, products ] )
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [  ] )
 
 	useEffect( (  ) => { 
 		category && setFilteredProducts( products.filter( product => ( 

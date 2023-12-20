@@ -2,8 +2,13 @@ const mongoose = require("mongoose");
 
 const FavoriteSchema = new mongoose.Schema({
 	userId: { type: String, required: true },
+<<<<<<< HEAD
 	products: [
 		{
+=======
+	products: [ 
+		{ 
+>>>>>>> feat/client-api-communication
 			title: { type: String, required: true },
 			description: { type: String, required: true },
 			img: { type: String, required: true },
