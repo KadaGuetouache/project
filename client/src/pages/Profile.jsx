@@ -25,6 +25,9 @@ const Profile = ( { currentUser } ) => {
 		}
 
 		updateUserProfile( currentUser, user, dispatch )
+			.then( (  ) => { 
+				setNotify( { display: true, type: "success", message: "Your profile has been updated" } )
+			} )
 			.catch( error => { 
 				setNotify( { display: true, type: "error", message: error } )
 			} )
