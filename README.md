@@ -1,10 +1,12 @@
-# Shopping Circle
+# Clothing Circle
 
 ## Video Demo:
 
 ## Description:
 
-Shopping Circle is an e-commerce store featuring the ability for a client to veiw products by categories or through filters add products to cart or favorite page and make a purchage using stripe with different delivery options. this project is build with React.js Redux.js ( for state managment ) in front-end and uses Node.js Express.js MongoDB and JWT for backend.
+Clothing Circle is an e-commerce store featuring the ability for a client to veiw products by categories or through filters add products to cart or favorite page and make a purchage using stripe with different delivery options. this project is build with React.js Redux.js ( for state managment ) in front-end and uses Node.js Express.js MongoDB and JWT for backend.
+
+![Preview of the ecommerce store](/static//homepage.png)
 
 ## [Table of contents](#table-of-contents)
 
@@ -84,6 +86,46 @@ the run this project you will need to have two terminal open while developing fo
 just head to each project folder the type `npm run start` or `yarn start`.
 
 ## Project Overview
+
+This project is an ecommerce store where clients can view products by categories, color, size and price throught filters.
+
+![Preview categories page](/static//categories.png)
+
+## Profile page
+
+users when they are logged in can update their profile information.
+
+![Preview profile](/static//profile.png)
+
+### product page
+
+clients can view individual products when they will be provided with avaible colors, sizes, and choose a quantity before adding product to their cart associated with their account.
+
+![Preview product page](/static//single-product.png)
+
+### Search
+
+In top bar their is a search field that will get all products by their name in real time where a user can get a specific product.
+
+![Preivew search](/static//search.png)
+
+## Favorite page
+
+clients can add product to a wishlist page where their favorite products are displayed with neccessary information like size and colors available and with a press of button can go to that product so they can choose their variation and add it to cart.
+
+![Preview favorite page](/static//favorite.png)
+
+## Cart page
+
+in cart page clients can view products that are willing to purchase depending in the variation they choose while are provided with prices for each product with the ability to choose a specific quantity that will change both the price of the product and total products.
+
+![Preview Cart](/static//cart.png)
+
+## Checkout page
+
+clients will be redirected to stripe checkout page where they can enter their card information to make a purchase stripe is a very well known and secure way to make online purchase. they can adjust the delivery options and make a secure purchase.
+
+![Preview Checkout](/static//stripe.png)
 
 ## Code Overview
 
